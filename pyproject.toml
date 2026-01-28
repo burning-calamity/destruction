@@ -5,105 +5,327 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "destruction"
 version = "0.1.2"
-description = "A Python package with an intentionally massive dependency footprint according to chat gpt"
+description = "A Python package with an intentionally massive dependency footprint"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 
 dependencies = [
-# --- core ---
-"numpy","scipy","pandas","sympy","numba","xarray","statsmodels","pytz","tzdata",
 
-# --- plotting ---
-"matplotlib","seaborn","plotly","bokeh","altair","holoviews","panel","datashader",
+# =====================
+# Core / numeric
+# =====================
+"numpy",
+"scipy",
+"pandas",
+"sympy",
+"numba",
+"xarray",
+"statsmodels",
+"pytz",
+"tzdata",
 
-# --- ML / data ---
-"scikit-learn","lightgbm","xgboost","catboost","imbalanced-learn","shap",
-"optuna","mlflow","dask","dask-ml","joblib",
+# =====================
+# Plotting / viz
+# =====================
+"matplotlib",
+"seaborn",
+"plotly",
+"bokeh",
+"altair",
+"holoviews",
+"panel",
+"datashader",
 
-# --- deep learning ---
-"torch","torchvision","torchaudio",
-"tensorflow","keras",
-"jax","jaxlib","flax","optax",
+# =====================
+# ML / data
+# =====================
+"scikit-learn",
+"lightgbm",
+"xgboost",
+"catboost",
+"imbalanced-learn",
+"shap",
+"optuna",
+"mlflow",
+"dask",
+"dask-ml",
+"joblib",
 
-# --- NLP ---
-"spacy","nltk","gensim","sentence-transformers","transformers","tokenizers",
-"datasets","evaluate","sacremoses",
+# =====================
+# Deep learning
+# =====================
+"torch",
+"torchvision",
+"torchaudio",
+"tensorflow",
+"keras",
+"jax",
+"jaxlib",
+"flax",
+"optax",
 
-# --- CV ---
-"opencv-python","scikit-image","imageio","pillow","albumentations","timm",
+# =====================
+# NLP
+# =====================
+"spacy",
+"nltk",
+"gensim",
+"sentence-transformers",
+"transformers",
+"tokenizers",
+"datasets",
+"evaluate",
+"sacremoses",
 
-# --- web ---
-"requests","httpx","urllib3","aiohttp","fastapi","flask","django",
-"starlette","uvicorn","gunicorn","waitress","connexion",
+# =====================
+# Computer vision
+# =====================
+"opencv-python",
+"scikit-image",
+"imageio",
+"pillow",
+"albumentations",
+"timm",
 
-# --- async ---
-"anyio","trio","async-timeout","greenlet","gevent","uvloop",
+# =====================
+# Web / APIs
+# =====================
+"requests",
+"httpx",
+"urllib3",
+"aiohttp",
+"fastapi",
+"flask",
+"django",
+"starlette",
+"uvicorn",
+"gunicorn",
+"waitress",
+"connexion",
 
-# --- parsing / formats ---
-"pyyaml","toml","tomli","jsonschema","lxml","beautifulsoup4","html5lib",
-"xmltodict","orjson","ujson","msgpack","cattrs",
+# =====================
+# Async / event loops
+# =====================
+"anyio",
+"trio",
+"async-timeout",
+"greenlet",
 
-# --- databases ---
-"sqlalchemy","psycopg2-binary","pymysql","pymongo","redis","tinydb",
-"duckdb","influxdb-client","cassandra-driver","neo4j",
+# Linux / macOS only
+"uvloop; platform_system != 'Windows'",
+"gevent; platform_system != 'Windows'",
 
-# --- crypto / security ---
-"cryptography","bcrypt","passlib","pyjwt","argon2-cffi","pynacl",
+# =====================
+# Parsing / formats
+# =====================
+"pyyaml",
+"toml",
+"tomli",
+"jsonschema",
+"lxml",
+"beautifulsoup4",
+"html5lib",
+"xmltodict",
+"orjson",
+"ujson",
+"msgpack",
+"cattrs",
 
-# --- CLI / UX ---
-"rich","typer","click","prompt-toolkit","tqdm","colorama","blessed",
+# =====================
+# Databases
+# =====================
+"sqlalchemy",
+"psycopg2-binary",
+"pymysql",
+"pymongo",
+"redis",
+"tinydb",
+"duckdb",
+"influxdb-client",
+"cassandra-driver",
+"neo4j",
 
-# --- testing ---
-"pytest","pytest-cov","pytest-asyncio","hypothesis","coverage",
-"tox","nox","responses","freezegun",
+# =====================
+# Crypto / security
+# =====================
+"cryptography",
+"bcrypt",
+"passlib",
+"pyjwt",
+"argon2-cffi",
+"pynacl",
 
-# --- formatting / lint ---
-"black","isort","ruff","mypy","pylint","flake8","autopep8",
+# =====================
+# CLI / UX
+# =====================
+"rich",
+"typer",
+"click",
+"prompt-toolkit",
+"tqdm",
+"colorama",
+"blessed",
 
-# --- notebooks ---
-"jupyter","ipython","ipykernel","notebook","jupyterlab",
-"nbconvert","nbformat","voila",
+# =====================
+# Testing / QA
+# =====================
+"pytest",
+"pytest-cov",
+"pytest-asyncio",
+"hypothesis",
+"coverage",
+"tox",
+"nox",
+"responses",
+"freezegun",
 
-# --- files / IO ---
-"fsspec","smart-open","watchdog","pathspec","platformdirs",
+# =====================
+# Formatting / lint
+# =====================
+"black",
+"isort",
+"ruff",
+"mypy",
+"pylint",
+"flake8",
+"autopep8",
 
-# --- dates / time ---
-"python-dateutil","arrow","pendulum","dateparser",
+# =====================
+# Notebooks
+# =====================
+"jupyter",
+"ipython",
+"ipykernel",
+"notebook",
+"jupyterlab",
+"nbconvert",
+"nbformat",
+"voila",
 
-# --- config / utils ---
-"attrs","pydantic","dataclasses-json","cachetools","tenacity",
-"loguru","python-dotenv","packaging","importlib-metadata",
+# =====================
+# Files / IO
+# =====================
+"fsspec",
+"smart-open",
+"watchdog",
+"pathspec",
+"platformdirs",
 
-# --- cloud / misc ---
-"boto3","botocore","s3transfer",
-"google-cloud-storage","google-auth",
-"azure-storage-blob","azure-identity",
+# =====================
+# Dates / time
+# =====================
+"python-dateutil",
+"arrow",
+"pendulum",
+"dateparser",
 
-# --- visualization extras ---
-"graphviz","pygraphviz","networkx","python-louvain","pydot",
+# =====================
+# Config / utils
+# =====================
+"attrs",
+"pydantic",
+"dataclasses-json",
+"cachetools",
+"tenacity",
+"loguru",
+"python-dotenv",
+"packaging",
+"importlib-metadata",
 
-# --- audio ---
-"librosa","soundfile","pydub","torchaudio","audioread",
+# =====================
+# Cloud
+# =====================
+"boto3",
+"botocore",
+"s3transfer",
+"google-cloud-storage",
+"google-auth",
+"azure-storage-blob",
+"azure-identity",
 
-# --- geospatial ---
-"shapely","geopandas","pyproj","rasterio","fiona","folium",
+# =====================
+# Graphs / viz extras
+# =====================
+"networkx",
+"python-louvain",
+"pydot",
 
-# --- math / science ---
-"control","pint","uncertainties","ase","rdkit-pypi","coolprop",
+# Linux / macOS only (native deps)
+"graphviz; platform_system != 'Windows'",
+"pygraphviz; platform_system != 'Windows'",
 
-# --- web scraping ---
-"scrapy","selenium","playwright","requests-html","fake-useragent",
+# =====================
+# Audio
+# =====================
+"librosa",
+"soundfile",
+"pydub",
+"audioread",
 
-# --- messaging ---
-"kafka-python","pika","kombu","celery","rq",
+# =====================
+# Geospatial (problematic on Windows)
+# =====================
+"shapely",
+"geopandas; platform_system != 'Windows'",
+"pyproj; platform_system != 'Windows'",
+"rasterio; platform_system != 'Windows'",
+"fiona; platform_system != 'Windows'",
+"folium",
 
-# --- monitoring ---
-"prometheus-client","opentelemetry-api","opentelemetry-sdk",
+# =====================
+# Math / science
+# =====================
+"control",
+"pint",
+"uncertainties",
+"ase",
+"rdkit-pypi",
+"coolprop",
 
-# --- random extras to reach 300 ---
-"humanize","boltons","more-itertools","toolz","zipp",
-"regex","rapidfuzz","python-slugify","shortuuid","ulid-py",
-"bcrypt","argon2-cffi-bindings","pyopenssl","certifi","idna",
-"charset-normalizer","six","wrapt","typing-extensions"
+# =====================
+# Web scraping
+# =====================
+"scrapy",
+"selenium",
+"playwright",
+"requests-html",
+"fake-useragent",
+
+# =====================
+# Messaging / queues
+# =====================
+"kafka-python",
+"pika",
+"kombu",
+"celery",
+"rq",
+
+# =====================
+# Monitoring
+# =====================
+"prometheus-client",
+"opentelemetry-api",
+"opentelemetry-sdk",
+
+# =====================
+# Final padding
+# =====================
+"humanize",
+"boltons",
+"more-itertools",
+"toolz",
+"zipp",
+"regex",
+"rapidfuzz",
+"python-slugify",
+"shortuuid",
+"ulid-py",
+"pyopenssl",
+"certifi",
+"idna",
+"charset-normalizer",
+"six",
+"wrapt",
+"typing-extensions"
 ]
