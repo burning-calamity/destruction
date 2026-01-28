@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "destruction"
-version = "0.1.2"
-description = "A Python package with an intentionally massive dependency footprint"
+version = "0.1.4"
+description = "A Python package with a very large but cross-platform-safe dependency set, as of right now am going through hell correcting windows issues, about to start saying i use arch btw to fix it maybe"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -53,7 +53,7 @@ dependencies = [
 "joblib",
 
 # =====================
-# Deep learning
+# Deep learning (wheels exist for all OSes)
 # =====================
 "torch",
 "torchvision",
@@ -100,19 +100,21 @@ dependencies = [
 "django",
 "starlette",
 "uvicorn",
-"gunicorn",
 "waitress",
 "connexion",
 
+# gunicorn is NOT Windows-compatible
+"gunicorn; platform_system != 'Windows'",
+
 # =====================
-# Async / event loops
+# Async / concurrency
 # =====================
 "anyio",
 "trio",
 "async-timeout",
 "greenlet",
 
-# Linux / macOS only
+# native event loops (NOT Windows)
 "uvloop; platform_system != 'Windows'",
 "gevent; platform_system != 'Windows'",
 
@@ -245,13 +247,13 @@ dependencies = [
 "azure-identity",
 
 # =====================
-# Graphs / viz extras
+# Graph / network
 # =====================
 "networkx",
 "python-louvain",
 "pydot",
 
-# Linux / macOS only (native deps)
+# graphviz stack (native, fragile on Windows)
 "graphviz; platform_system != 'Windows'",
 "pygraphviz; platform_system != 'Windows'",
 
@@ -264,14 +266,16 @@ dependencies = [
 "audioread",
 
 # =====================
-# Geospatial (problematic on Windows)
+# Geospatial (Windows-safe subset only)
 # =====================
 "shapely",
+"folium",
+
+# geopandas stack is native-heavy → gate it
 "geopandas; platform_system != 'Windows'",
 "pyproj; platform_system != 'Windows'",
 "rasterio; platform_system != 'Windows'",
 "fiona; platform_system != 'Windows'",
-"folium",
 
 # =====================
 # Math / science
@@ -280,8 +284,12 @@ dependencies = [
 "pint",
 "uncertainties",
 "ase",
-"rdkit-pypi",
-"coolprop",
+
+# rdkit is NOT installable on Windows / py312
+"rdkit-pypi; platform_system != 'Windows' and python_version < '3.12'",
+
+# CoolProp frequently fails on Windows
+"coolprop; platform_system != 'Windows'",
 
 # =====================
 # Web scraping
@@ -309,7 +317,7 @@ dependencies = [
 "opentelemetry-sdk",
 
 # =====================
-# Final padding
+# Padding / utilities
 # =====================
 "humanize",
 "boltons",
