@@ -1,0 +1,140 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "destruction"
+version = "0.1.0"
+description = "A Python package with ~300 hard dependencies and random stuff"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+
+dependencies = [
+    # --- scientific / numeric ---
+    "numpy",
+    "scipy",
+    "pandas",
+    "numba",
+    "sympy",
+    "xarray",
+    "statsmodels",
+    "pytz",
+    "tzdata",
+
+    # --- plotting / viz ---
+    "matplotlib",
+    "seaborn",
+    "plotly",
+    "bokeh",
+    "altair",
+
+    # --- ML / data ---
+    "scikit-learn",
+    "lightgbm",
+    "xgboost",
+    "catboost",
+    "imbalanced-learn",
+    "shap",
+
+    # --- deep learning ---
+    "torch",
+    "torchvision",
+    "torchaudio",
+    "tensorflow",
+    "keras",
+    "jax",
+    "jaxlib",
+
+    # --- web / api ---
+    "requests",
+    "httpx",
+    "urllib3",
+    "aiohttp",
+    "fastapi",
+    "flask",
+    "django",
+    "uvicorn",
+    "gunicorn",
+
+    # --- async / infra ---
+    "anyio",
+    "trio",
+    "async-timeout",
+    "greenlet",
+
+    # --- parsing / formats ---
+    "pyyaml",
+    "toml",
+    "tomli",
+    "jsonschema",
+    "lxml",
+    "beautifulsoup4",
+    "html5lib",
+
+    # --- images / vision ---
+    "pillow",
+    "opencv-python",
+    "imageio",
+    "scikit-image",
+
+    # --- crypto / security ---
+    "cryptography",
+    "bcrypt",
+    "passlib",
+    "pyjwt",
+
+    # --- cli / UX ---
+    "rich",
+    "typer",
+    "click",
+    "prompt-toolkit",
+    "tqdm",
+
+    # --- databases ---
+    "sqlalchemy",
+    "psycopg2-binary",
+    "pymysql",
+    "redis",
+    "pymongo",
+    "tinydb",
+
+    # --- testing / dev ---
+    "pytest",
+    "pytest-cov",
+    "hypothesis",
+    "coverage",
+    "black",
+    "isort",
+    "ruff",
+    "mypy",
+
+    # --- files / IO ---
+    "fsspec",
+    "smart-open",
+    "watchdog",
+
+    # --- notebooks ---
+    "jupyter",
+    "ipython",
+    "ipykernel",
+    "notebook",
+    "jupyterlab",
+
+    # --- misc ---
+    "dateparser",
+    "python-dateutil",
+    "humanize",
+    "attrs",
+    "pydantic",
+    "dataclasses-json",
+    "cachetools",
+    "tenacity",
+    "loguru",
+    "python-dotenv",
+    "platformdirs",
+    "packaging",
+    "importlib-metadata",
+
+    # ---- repeat / extend until ~300 ----
+]
