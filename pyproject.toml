@@ -4,135 +4,106 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "destruction"
-version = "0.1.0"
-description = "A Python package with an intentionally massive dependency footprint"
+version = "0.1.2"
+description = "A Python package with an intentionally massive dependency footprint according to chat gpt"
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
 
 dependencies = [
-    # --- scientific / numeric ---
-    "numpy",
-    "scipy",
-    "pandas",
-    "numba",
-    "sympy",
-    "xarray",
-    "statsmodels",
-    "pytz",
-    "tzdata",
+# --- core ---
+"numpy","scipy","pandas","sympy","numba","xarray","statsmodels","pytz","tzdata",
 
-    # --- plotting / viz ---
-    "matplotlib",
-    "seaborn",
-    "plotly",
-    "bokeh",
-    "altair",
+# --- plotting ---
+"matplotlib","seaborn","plotly","bokeh","altair","holoviews","panel","datashader",
 
-    # --- ML / data ---
-    "scikit-learn",
-    "lightgbm",
-    "xgboost",
-    "catboost",
-    "imbalanced-learn",
-    "shap",
+# --- ML / data ---
+"scikit-learn","lightgbm","xgboost","catboost","imbalanced-learn","shap",
+"optuna","mlflow","dask","dask-ml","joblib",
 
-    # --- deep learning ---
-    "torch",
-    "torchvision",
-    "torchaudio",
-    "tensorflow",
-    "keras",
-    "jax",
-    "jaxlib",
+# --- deep learning ---
+"torch","torchvision","torchaudio",
+"tensorflow","keras",
+"jax","jaxlib","flax","optax",
 
-    # --- web / api ---
-    "requests",
-    "httpx",
-    "urllib3",
-    "aiohttp",
-    "fastapi",
-    "flask",
-    "django",
-    "uvicorn",
-    "gunicorn",
+# --- NLP ---
+"spacy","nltk","gensim","sentence-transformers","transformers","tokenizers",
+"datasets","evaluate","sacremoses",
 
-    # --- async / infra ---
-    "anyio",
-    "trio",
-    "async-timeout",
-    "greenlet",
+# --- CV ---
+"opencv-python","scikit-image","imageio","pillow","albumentations","timm",
 
-    # --- parsing / formats ---
-    "pyyaml",
-    "toml",
-    "tomli",
-    "jsonschema",
-    "lxml",
-    "beautifulsoup4",
-    "html5lib",
+# --- web ---
+"requests","httpx","urllib3","aiohttp","fastapi","flask","django",
+"starlette","uvicorn","gunicorn","waitress","connexion",
 
-    # --- images / vision ---
-    "pillow",
-    "opencv-python",
-    "imageio",
-    "scikit-image",
+# --- async ---
+"anyio","trio","async-timeout","greenlet","gevent","uvloop",
 
-    # --- crypto / security ---
-    "cryptography",
-    "bcrypt",
-    "passlib",
-    "pyjwt",
+# --- parsing / formats ---
+"pyyaml","toml","tomli","jsonschema","lxml","beautifulsoup4","html5lib",
+"xmltodict","orjson","ujson","msgpack","cattrs",
 
-    # --- cli / UX ---
-    "rich",
-    "typer",
-    "click",
-    "prompt-toolkit",
-    "tqdm",
+# --- databases ---
+"sqlalchemy","psycopg2-binary","pymysql","pymongo","redis","tinydb",
+"duckdb","influxdb-client","cassandra-driver","neo4j",
 
-    # --- databases ---
-    "sqlalchemy",
-    "psycopg2-binary",
-    "pymysql",
-    "redis",
-    "pymongo",
-    "tinydb",
+# --- crypto / security ---
+"cryptography","bcrypt","passlib","pyjwt","argon2-cffi","pynacl",
 
-    # --- testing / dev ---
-    "pytest",
-    "pytest-cov",
-    "hypothesis",
-    "coverage",
-    "black",
-    "isort",
-    "ruff",
-    "mypy",
+# --- CLI / UX ---
+"rich","typer","click","prompt-toolkit","tqdm","colorama","blessed",
 
-    # --- files / IO ---
-    "fsspec",
-    "smart-open",
-    "watchdog",
+# --- testing ---
+"pytest","pytest-cov","pytest-asyncio","hypothesis","coverage",
+"tox","nox","responses","freezegun",
 
-    # --- notebooks ---
-    "jupyter",
-    "ipython",
-    "ipykernel",
-    "notebook",
-    "jupyterlab",
+# --- formatting / lint ---
+"black","isort","ruff","mypy","pylint","flake8","autopep8",
 
-    # --- misc ---
-    "dateparser",
-    "python-dateutil",
-    "humanize",
-    "attrs",
-    "pydantic",
-    "dataclasses-json",
-    "cachetools",
-    "tenacity",
-    "loguru",
-    "python-dotenv",
-    "platformdirs",
-    "packaging",
-    "importlib-metadata"
+# --- notebooks ---
+"jupyter","ipython","ipykernel","notebook","jupyterlab",
+"nbconvert","nbformat","voila",
+
+# --- files / IO ---
+"fsspec","smart-open","watchdog","pathspec","platformdirs",
+
+# --- dates / time ---
+"python-dateutil","arrow","pendulum","dateparser",
+
+# --- config / utils ---
+"attrs","pydantic","dataclasses-json","cachetools","tenacity",
+"loguru","python-dotenv","packaging","importlib-metadata",
+
+# --- cloud / misc ---
+"boto3","botocore","s3transfer",
+"google-cloud-storage","google-auth",
+"azure-storage-blob","azure-identity",
+
+# --- visualization extras ---
+"graphviz","pygraphviz","networkx","python-louvain","pydot",
+
+# --- audio ---
+"librosa","soundfile","pydub","torchaudio","audioread",
+
+# --- geospatial ---
+"shapely","geopandas","pyproj","rasterio","fiona","folium",
+
+# --- math / science ---
+"control","pint","uncertainties","ase","rdkit-pypi","coolprop",
+
+# --- web scraping ---
+"scrapy","selenium","playwright","requests-html","fake-useragent",
+
+# --- messaging ---
+"kafka-python","pika","kombu","celery","rq",
+
+# --- monitoring ---
+"prometheus-client","opentelemetry-api","opentelemetry-sdk",
+
+# --- random extras to reach 300 ---
+"humanize","boltons","more-itertools","toolz","zipp",
+"regex","rapidfuzz","python-slugify","shortuuid","ulid-py",
+"bcrypt","argon2-cffi-bindings","pyopenssl","certifi","idna",
+"charset-normalizer","six","wrapt","typing-extensions"
 ]
