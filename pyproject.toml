@@ -5,10 +5,10 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "destruction"
 version = "0.1.0"
-description = "A Python package with ~300 hard dependencies and random stuff"
+description = "A Python package with an intentionally massive dependency footprint"
 readme = "README.md"
 requires-python = ">=3.9"
-license = {text = "MIT"}
+license = { text = "MIT" }
 
 dependencies = [
     # --- scientific / numeric ---
@@ -134,7 +134,5 @@ dependencies = [
     "python-dotenv",
     "platformdirs",
     "packaging",
-    "importlib-metadata",
-
-    # ---- repeat / extend until ~300 ----
+    "importlib-metadata"
 ]
