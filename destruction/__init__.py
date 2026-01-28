@@ -1,8 +1,8 @@
 import pkgutil
 import importlib
 
-__version__ = "0.1.5"
-
+__version__ = "0.1.6"
+edit = "cool anthem"
 __all__ = [m.name for m in pkgutil.iter_modules(__path__)]
 
 def __getattr__(name):
