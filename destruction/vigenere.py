@@ -1,48 +1,23 @@
-class VigenereCipher:
-    @staticmethod
-    def encrypt(text: str, key: str) -> str:
-        if not key or not key.isalpha():
-            raise ValueError("Key must be a non-empty alphabetic string")
+def vigenere(text: str, key: str, decrypt: bool = False) -> str:
+    """
+    Vigenère cipher.
+    Set decrypt=True to decrypt.
+    """
+    result = []
+    key = [ord(c.lower()) - 97 for c in key if c.isalpha()]
+    if not key:
+        raise ValueError("Key must contain letters")
 
-        result = []
-        key = key.lower()
-        key_len = len(key)
-        key_index = 0
+    ki = 0
+    for ch in text:
+        if ch.isalpha():
+            base = 97 if ch.islower() else 65
+            shift = key[ki % len(key)]
+            if decrypt:
+                shift = -shift
+            result.append(chr((ord(ch) - base + shift) % 26 + base))
+            ki += 1
+        else:
+            result.append(ch)
 
-        for ch in text:
-            if ch.isalpha():
-                shift = ord(key[key_index % key_len]) - ord('a')
-                if ch.islower():
-                    result.append(chr((ord(ch) - ord('a') + shift) % 26 + ord('a')))
-                else:
-                    result.append(chr((ord(ch) - ord('A') + shift) % 26 + ord('A')))
-                key_index += 1
-            else:
-                result.append(ch)
-
-        return ''.join(result)
-
-    @staticmethod
-    def decrypt(text: str, key: str) -> str:
-        if not key or not key.isalpha():
-            raise ValueError("Key must be a non-empty alphabetic string")
-
-        result = []
-        key = key.lower()
-        key_len = len(key)
-        key_index = 0
-
-        for ch in text:
-            if ch.isalpha():
-                shift = ord(key[key_index % key_len]) - ord('a')
-                if ch.islower():
-                    result.append(chr((ord(ch) - ord('a') - shift) % 26 + ord('a')))
-                else:
-                    result.append(chr((ord(ch) - ord('A') - shift) % 26 + ord('A')))
-                key_index += 1
-            else:
-                result.append(ch)
-
-        return ''.join(result)
-
-vigenere = VigenereCipher()
+    return "".join(result)
