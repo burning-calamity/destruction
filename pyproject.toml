@@ -12,7 +12,7 @@ license = { text = "MIT" }
 
 
 dependencies = [
-"poetry"
+"poetry",
 # =====================
 # Core / numeric
 # =====================
