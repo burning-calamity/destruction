@@ -350,6 +350,10 @@ dependencies = [
 crypto = ["regex", "rapidfuzz"]
 sandbox = ["rich"]
 
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["catastrophe*"]
+
 [project.scripts]
 destruction = "destruction.__main__:main"
 destruction-test = "destruction.tester:tester"
