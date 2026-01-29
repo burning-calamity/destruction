@@ -3,7 +3,7 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "destruction"
+name = "catastrophe"
 version = "0.1.15"
 description = "A Python package with a very large but cross-platform-safe dependency set, add chiphers and fixed some bugs."
 readme = "README.md"
