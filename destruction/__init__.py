@@ -1,8 +1,9 @@
 from __future__ import annotations
-version = "0.1.10"
+
+__version__ = "0.1.11"
+
 import importlib
 import pkgutil
-from types import ModuleType
 from typing import List
 
 # ---- automatic discovery of public submodules ----
@@ -22,8 +23,7 @@ __all__ = _discover_public_modules()
 def __dir__():
     return sorted(__all__)
 
-import importlib
-import types
+# ---- lazy attribute access + callable modules ----
 
 def __getattr__(name):
     try:
@@ -31,7 +31,7 @@ def __getattr__(name):
     except ModuleNotFoundError:
         raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
-    # If module has a function with the same name, return it
+    # If module has a function with the same name, return it directly
     if hasattr(module, name) and callable(getattr(module, name)):
         return getattr(module, name)
 
