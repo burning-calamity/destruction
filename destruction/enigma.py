@@ -1,45 +1,52 @@
-ROTORS = [
-    "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
-    "AJDKSIRUXBLHWTMCQGZNPYFVOE",
-    "BDFHJLCPRTXVZNYEIWGAKMUSQO",
-]
+import string
+
+ALPHA = string.ascii_uppercase
+
+ROTORS = {
+    "I":   "EKMFLGDQVZNTOWYHXUSPAIBRCJ",
+    "II":  "AJDKSIRUXBLHWTMCQGZNPYFVOE",
+    "III": "BDFHJLCPRTXVZNYEIWGAKMUSQO",
+}
 
 REFLECTOR = "YRUHQSLDPXNGOKMIEBFZCWVJAT"
 
+def _shift(c, wiring, pos, reverse=False):
+    idx = (ALPHA.index(c) + pos) % 26
+    if reverse:
+        return ALPHA[(wiring.index(ALPHA[idx]) - pos) % 26]
+    return ALPHA[(ALPHA.index(wiring[idx]) - pos) % 26]
 
-def enigma(text: str, key: str = "AAA") -> str:
-    """
-    Simplified Enigma-like cipher.
-    Same function encrypts and decrypts.
-    """
-    pos = [ord(c.upper()) - 65 for c in key[:3]]
-    result = []
+def enigma(
+    text: str,
+    rotors=("I", "II", "III"),
+    positions=(0, 0, 0),
+):
+    r = [ROTORS[x] for x in rotors]
+    p = list(positions)
+
+    out = []
 
     for ch in text.upper():
         if not ch.isalpha():
-            result.append(ch)
+            out.append(ch)
             continue
 
-        c = ord(ch) - 65
+        # rotor stepping
+        p[2] = (p[2] + 1) % 26
+        if p[2] == 0:
+            p[1] = (p[1] + 1) % 26
+            if p[1] == 0:
+                p[0] = (p[0] + 1) % 26
 
-        # forward rotors
-        for i in range(3):
-            c = (ord(ROTORS[i][(c + pos[i]) % 26]) - 65)
+        c = ch
+        for i in (2, 1, 0):
+            c = _shift(c, r[i], p[i])
 
-        # reflector
-        c = ord(REFLECTOR[c]) - 65
+        c = REFLECTOR[ALPHA.index(c)]
 
-        # reverse rotors
-        for i in reversed(range(3)):
-            c = (ROTORS[i].index(chr(c + 65)) - pos[i]) % 26
+        for i in (0, 1, 2):
+            c = _shift(c, r[i], p[i], reverse=True)
 
-        result.append(chr(c + 65))
+        out.append(c)
 
-        # step rotors
-        pos[0] = (pos[0] + 1) % 26
-        if pos[0] == 0:
-            pos[1] = (pos[1] + 1) % 26
-            if pos[1] == 0:
-                pos[2] = (pos[2] + 1) % 26
-
-    return "".join(result)
+    return "".join(out)
