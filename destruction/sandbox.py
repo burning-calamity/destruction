@@ -3,102 +3,77 @@ from __future__ import annotations
 import importlib
 import multiprocessing as mp
 import traceback
+import time
 from typing import Any, Dict, Tuple
-
 
 class SandboxError(RuntimeError):
     pass
 
 
-def _is_too_big(obj: Any, max_chars: int) -> bool:
-    # Conservative: only measure strings/bytes/iterables of strings
+def _estimate_size(obj: Any) -> int:
+    if isinstance(obj, (str, bytes, bytearray)):
+        return len(obj)
+    if isinstance(obj, (list, tuple)):
+        return sum(_estimate_size(x) for x in obj)
+    if isinstance(obj, dict):
+        return sum(_estimate_size(k) + _estimate_size(v) for k, v in obj.items())
+    return 32  # conservative fallback
+
+
+def _worker(func_path: Tuple[str, str], args, kwargs, q: mp.Queue):
     try:
-        if isinstance(obj, (str, bytes, bytearray)):
-            return len(obj) > max_chars
-        if isinstance(obj, (list, tuple)):
-            total = 0
-            for x in obj:
-                if isinstance(x, (str, bytes, bytearray)):
-                    total += len(x)
-                else:
-                    total += 16
-                if total > max_chars:
-                    return True
-            return False
-    except Exception:
-        return True
-    return False
-
-
-def _worker(func_path: Tuple[str, str], args: Tuple[Any, ...], kwargs: Dict[str, Any], q: mp.Queue):
-    try:
-        mod_name, attr_name = func_path
-        mod = importlib.import_module(mod_name)
-        fn = getattr(mod, attr_name)
-
+        mod = importlib.import_module(func_path[0])
+        fn = getattr(mod, func_path[1])
         out = fn(*args, **kwargs)
-        q.put({"ok": True, "result": out})
+        q.put(("ok", out))
     except Exception as e:
-        q.put(
-            {
-                "ok": False,
-                "error": f"{type(e).__name__}: {e}",
-                "traceback": traceback.format_exc(),
-            }
-        )
+        q.put(("err", f"{type(e).__name__}: {e}", traceback.format_exc()))
 
 
 def sandbox(
     cipher: str,
-    *args: Any,
+    *args,
     timeout: float = 1.0,
-    max_chars: int = 200_000,
-    allow_bytes: bool = True,
-    **kwargs: Any,
-) -> Any:
+    max_size: int = 200_000,
+    **kwargs,
+):
     """
-    Sandbox runner:
-      - runs cipher in a subprocess (timeout enforced)
-      - rejects overly large inputs
-      - returns the cipher result or raises SandboxError
+    Safe cipher runner.
+
+    - subprocess isolation
+    - hard timeout
+    - input size guard
+    - no global state leakage
 
     Usage:
-      destruction.sandbox("atbash", "hello")
-      destruction.sandbox("caesar", "HELLO", 3)
+        destruction.sandbox("caesar", "HELLO", 3)
     """
-    if not isinstance(cipher, str) or not cipher:
-        raise SandboxError("cipher must be a non-empty string (module/function name).")
+    if not cipher.isidentifier():
+        raise SandboxError("Invalid cipher name")
 
-    # Basic size checks
-    for obj in args:
-        if not allow_bytes and isinstance(obj, (bytes, bytearray)):
-            raise SandboxError("bytes inputs disabled in sandbox.")
-        if _is_too_big(obj, max_chars):
-            raise SandboxError(f"input too large (max_chars={max_chars}).")
-
-    for k, v in kwargs.items():
-        if _is_too_big(v, max_chars):
-            raise SandboxError(f"kwarg '{k}' too large (max_chars={max_chars}).")
-
-    # Resolve function by importing the module destruction.<cipher> and calling <cipher>(...)
-    func_path = (f"destruction.{cipher}", cipher)
+    size = sum(_estimate_size(a) for a in args) + sum(_estimate_size(v) for v in kwargs.values())
+    if size > max_size:
+        raise SandboxError("Input too large")
 
     q: mp.Queue = mp.Queue()
-    p = mp.Process(target=_worker, args=(func_path, args, kwargs, q), daemon=True)
+    p = mp.Process(
+        target=_worker,
+        args=((f"destruction.{cipher}", cipher), args, kwargs, q),
+        daemon=True,
+    )
+
     p.start()
-    p.join(timeout=timeout)
+    p.join(timeout)
 
     if p.is_alive():
         p.terminate()
-        p.join(0.2)
-        raise SandboxError(f"timeout after {timeout}s running cipher '{cipher}'.")
+        raise SandboxError("Execution timed out")
 
     if q.empty():
-        raise SandboxError(f"cipher '{cipher}' produced no result (process ended unexpectedly).")
+        raise SandboxError("No output from cipher")
 
     msg = q.get()
-    if msg.get("ok"):
-        return msg.get("result")
+    if msg[0] == "ok":
+        return msg[1]
 
-    # Keep error short by default; user can inspect traceback if needed
-    raise SandboxError(f"cipher '{cipher}' failed: {msg.get('error')}")
+    raise SandboxError(msg[1])
