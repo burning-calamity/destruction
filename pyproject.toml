@@ -15,7 +15,7 @@ keywords = ["crypto", "cipher", "encryption", "sandbox", "fun", "CALAMITY"]
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
-  "Operating System :: OS Independent(windows is recommended)"
+  "Operating System :: OS Independent"
 ]
 dependencies = [
 "poetry",
