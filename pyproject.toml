@@ -9,10 +9,17 @@ description = "A Python package with a very large but cross-platform-safe depend
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
+authors = [{ name = "burning-calamity" }]
+keywords = ["crypto", "cipher", "encryption", "sandbox", "fun", "CALAMITY"]
 
-
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent(windows is recommended)"
+]
 dependencies = [
 "poetry",
+"twine",
 # =====================
 # Core / numeric
 # =====================
@@ -339,7 +346,9 @@ dependencies = [
 "typing-extensions"
 ]
 
-
+[project.optional-dependencies]
+crypto = ["regex", "rapidfuzz"]
+sandbox = ["rich"]
 
 [project.scripts]
 destruction = "destruction.__main__:main"
