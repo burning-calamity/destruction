@@ -4,11 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "destruction"
-version = "0.1.13"
+version = "0.1.14"
 description = "A Python package with a very large but cross-platform-safe dependency set, add chiphers and fixed some bugs"
 readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
+
+[project.scripts]
+destruction = "destruction.__main__:main"
 
 dependencies = [
 
