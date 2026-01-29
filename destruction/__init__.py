@@ -1,5 +1,5 @@
 from __future__ import annotations
-version = "0.1.8"
+version = "0.1.9"
 import importlib
 import pkgutil
 from types import ModuleType
