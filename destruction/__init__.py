@@ -4,6 +4,7 @@ __version__ = "0.1.11"
 
 import importlib
 import pkgutil
+import sys
 from typing import List
 
 # ---- automatic discovery of public submodules ----
@@ -18,12 +19,12 @@ def _discover_public_modules() -> List[str]:
 
 __all__ = _discover_public_modules()
 
-# ---- editor support (Ctrl+Space / dir()) ----
+# ---- editor support ----
 
 def __dir__():
     return sorted(__all__)
 
-# ---- lazy attribute access + callable modules ----
+# ---- lazy loading + callable modules (FIXED) ----
 
 def __getattr__(name):
     try:
@@ -31,8 +32,12 @@ def __getattr__(name):
     except ModuleNotFoundError:
         raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
 
-    # If module has a function with the same name, return it directly
+    # If module exposes a function with same name → promote it
     if hasattr(module, name) and callable(getattr(module, name)):
-        return getattr(module, name)
+        func = getattr(module, name)
+        setattr(sys.modules[__name__], name, func)  # ← CRITICAL LINE
+        return func
 
+    # Otherwise expose the module normally
+    setattr(sys.modules[__name__], name, module)
     return module
