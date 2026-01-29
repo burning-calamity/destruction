@@ -1,0 +1,15 @@
+import string
+
+ROTOR = string.ascii_uppercase[13:] + string.ascii_uppercase[:13]
+
+def enigma_simple(text: str, offset: int = 0) -> str:
+    out = []
+    pos = offset % 26
+    for ch in text.upper():
+        if ch.isalpha():
+            idx = (ord(ch) - 65 + pos) % 26
+            out.append(ROTOR[idx])
+            pos = (pos + 1) % 26
+        else:
+            out.append(ch)
+    return "".join(out)
