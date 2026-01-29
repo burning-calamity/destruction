@@ -1,9 +1,12 @@
-from destruction.caesar import caesar
-from destruction.wordscore import score_text
+# destruction/brute.py
 
-def brute_caesar(text: str):
-    results = []
-    for i in range(26):
-        cand = caesar(text, i)
-        results.append((score_text(cand), i, cand))
-    return sorted(results, reverse=True)
+from destruction.scorer import score_text
+
+def brute_force(results: dict[str, str]):
+    ranked = []
+    for key, text in results.items():
+        s = score_text(text)
+        ranked.append((s["score"], key, text, s))
+
+    ranked.sort(reverse=True)
+    return ranked
