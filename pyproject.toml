@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "destruction"
-version = "0.1.10"
+version = "0.1.11"
 description = "A Python package with a very large but cross-platform-safe dependency set, as of right now am going through hell correcting windows issues, about to start saying i use arch btw to fix it maybe"
 readme = "README.md"
 requires-python = ">=3.8"
