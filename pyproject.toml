@@ -1,42 +1,359 @@
 [build-system]
-requires = ["setuptools>=77", "wheel", "build"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
-
 
 [project]
 name = "catastrophe"
 version = "0.1.15"
-description = "A sandbox-style cryptography and cipher toolkit (classical ciphers, analysis, transliteration)."
+description = "A Python package with a very large but cross-platform-safe dependency set, add chiphers and fixed some bugs."
 readme = "README.md"
 requires-python = ">=3.8"
-license = "MIT"
-
-authors = [
-  { name = "burning-calamity" }
-]
-
-keywords = ["cipher", "cryptography", "encryption", "sandbox", "classical-ciphers"]
+license = { text = "MIT" }
+authors = [{ name = "burning-calamity" }]
+keywords = ["crypto", "cipher", "encryption", "sandbox", "fun", "CALAMITY"]
 
 classifiers = [
   "Programming Language :: Python :: 3",
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent"
 ]
+dependencies = [
+# =====================
+# Core / numeric
+# =====================
+"numpy",
+"scipy",
+"pandas",
+"sympy",
+"numba",
+"xarray",
+"statsmodels",
+"pytz",
+"tzdata",
 
-# ⚠️ Runtime dependencies ONLY
-dependencies = []
+# =====================
+# Plotting / viz
+# =====================
+"matplotlib",
+"seaborn",
+"plotly",
+"bokeh",
+"altair",
+"holoviews",
+"panel",
+"datashader",
+
+# =====================
+# ML / data
+# =====================
+"scikit-learn",
+"lightgbm",
+"xgboost",
+"catboost",
+"imbalanced-learn",
+"shap",
+"optuna",
+"mlflow",
+"dask",
+"dask-ml",
+"joblib",
+
+# =====================
+# Deep learning (wheels exist for all OSes)
+# =====================
+"torch",
+"torchvision",
+"torchaudio",
+"tensorflow",
+"keras",
+"jax",
+"jaxlib",
+"flax",
+"optax",
+
+# =====================
+# NLP
+# =====================
+"spacy",
+"nltk",
+"gensim",
+"sentence-transformers",
+"transformers",
+"tokenizers",
+"datasets",
+"evaluate",
+"sacremoses",
+
+# =====================
+# Computer vision
+# =====================
+"opencv-python",
+"scikit-image",
+"imageio",
+"pillow",
+"albumentations",
+"timm",
+
+# =====================
+# Web / APIs
+# =====================
+"requests",
+"httpx",
+"urllib3",
+"aiohttp",
+"fastapi",
+"flask",
+"django",
+"starlette",
+"uvicorn",
+"waitress",
+"connexion",
+
+# gunicorn is NOT Windows-compatible
+"gunicorn; platform_system != 'Windows'",
+
+# =====================
+# Async / concurrency
+# =====================
+"anyio",
+"trio",
+"async-timeout",
+"greenlet",
+
+# native event loops (NOT Windows)
+"uvloop; platform_system != 'Windows'",
+"gevent; platform_system != 'Windows'",
+
+# =====================
+# Parsing / formats
+# =====================
+"pyyaml",
+"toml",
+"tomli",
+"jsonschema",
+"lxml",
+"beautifulsoup4",
+"html5lib",
+"xmltodict",
+"orjson",
+"ujson",
+"msgpack",
+"cattrs",
+
+# =====================
+# Databases
+# =====================
+"sqlalchemy",
+"psycopg2-binary",
+"pymysql",
+"pymongo",
+"redis",
+"tinydb",
+"duckdb",
+"influxdb-client",
+"cassandra-driver",
+"neo4j",
+
+# =====================
+# Crypto / security
+# =====================
+"cryptography",
+"bcrypt",
+"passlib",
+"pyjwt",
+"argon2-cffi",
+"pynacl",
+
+# =====================
+# CLI / UX
+# =====================
+"rich",
+"typer",
+"click",
+"prompt-toolkit",
+"tqdm",
+"colorama",
+"blessed",
+
+# =====================
+# Testing / QA
+# =====================
+"pytest",
+"pytest-cov",
+"pytest-asyncio",
+"hypothesis",
+"coverage",
+"tox",
+"nox",
+"responses",
+"freezegun",
+
+# =====================
+# Formatting / lint
+# =====================
+"black",
+"isort",
+"ruff",
+"mypy",
+"pylint",
+"flake8",
+"autopep8",
+
+# =====================
+# Notebooks
+# =====================
+"jupyter",
+"ipython",
+"ipykernel",
+"notebook",
+"jupyterlab",
+"nbconvert",
+"nbformat",
+"voila",
+
+# =====================
+# Files / IO
+# =====================
+"fsspec",
+"smart-open",
+"watchdog",
+"pathspec",
+"platformdirs",
+
+# =====================
+# Dates / time
+# =====================
+"python-dateutil",
+"arrow",
+"pendulum",
+"dateparser",
+
+# =====================
+# Config / utils
+# =====================
+"attrs",
+"pydantic",
+"dataclasses-json",
+"cachetools",
+"tenacity",
+"loguru",
+"python-dotenv",
+"packaging",
+"importlib-metadata",
+
+# =====================
+# Cloud
+# =====================
+"boto3",
+"botocore",
+"s3transfer",
+"google-cloud-storage",
+"google-auth",
+"azure-storage-blob",
+"azure-identity",
+
+# =====================
+# Graph / network
+# =====================
+"networkx",
+"python-louvain",
+"pydot",
+
+# graphviz stack (native, fragile on Windows)
+"graphviz; platform_system != 'Windows'",
+"pygraphviz; platform_system != 'Windows'",
+
+# =====================
+# Audio
+# =====================
+"librosa",
+"soundfile",
+"pydub",
+"audioread",
+
+# =====================
+# Geospatial (Windows-safe subset only)
+# =====================
+"shapely",
+"folium",
+
+# geopandas stack is native-heavy → gate it
+"geopandas; platform_system != 'Windows'",
+"pyproj; platform_system != 'Windows'",
+"rasterio; platform_system != 'Windows'",
+"fiona; platform_system != 'Windows'",
+
+# =====================
+# Math / science
+# =====================
+"control",
+"pint",
+"uncertainties",
+"ase",
+
+# rdkit is NOT installable on Windows / py312
+"rdkit-pypi; platform_system != 'Windows' and python_version < '3.12'",
+
+# CoolProp frequently fails on Windows
+"coolprop; platform_system != 'Windows'",
+
+# =====================
+# Web scraping
+# =====================
+"scrapy",
+"selenium",
+"playwright",
+"requests-html",
+"fake-useragent",
+
+# =====================
+# Messaging / queues
+# =====================
+"kafka-python",
+"pika",
+"kombu",
+"celery",
+"rq",
+
+# =====================
+# Monitoring
+# =====================
+"prometheus-client",
+"opentelemetry-api",
+"opentelemetry-sdk",
+
+# =====================
+# Padding / utilities
+# =====================
+"humanize",
+"boltons",
+"more-itertools",
+"toolz",
+"zipp",
+"regex",
+"rapidfuzz",
+"python-slugify",
+"shortuuid",
+"ulid-py",
+"pyopenssl",
+"certifi",
+"idna",
+"charset-normalizer",
+"six",
+"wrapt",
+"typing-extensions"
+]
 
 [project.optional-dependencies]
-# Optional helpers only
+crypto = ["regex", "rapidfuzz"]
 sandbox = ["rich"]
-analysis = ["regex", "rapidfuzz"]
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["catastrophe*"]
 
 [project.scripts]
-catastrophe = "catastrophe.__main__:main"
-catastrophe-test = "catastrophe.tester:tester"
-catastrophe-update = "catastrophe.updater:update"
-catastrophe-uninstall = "catastrophe.uninstaller:uninstall_hint"
+destruction = "destruction.__main__:main"
+destruction-test = "destruction.tester:tester"
+destruction-update = "destruction.updater:update"
+destruction-uninstall = "destruction.uninstaller:uninstall_hint"
