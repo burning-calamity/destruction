@@ -1,5 +1,5 @@
 from __future__ import annotations
-version = "0.1.9"
+version = "0.1.10"
 import importlib
 import pkgutil
 from types import ModuleType
@@ -17,23 +17,22 @@ def _discover_public_modules() -> List[str]:
 
 __all__ = _discover_public_modules()
 
-
-# ---- lazy attribute access ----
-
-def __getattr__(name: str):
-    if name in __all__:
-        module: ModuleType = importlib.import_module(f"{__name__}.{name}")
-        # Convention: module exposes an attribute with the same name
-        try:
-            return getattr(module, name)
-        except AttributeError:
-            raise AttributeError(
-                f"Module '{module.__name__}' does not expose '{name}'"
-            ) from None
-    raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
-
-
 # ---- editor support (Ctrl+Space / dir()) ----
 
 def __dir__():
     return sorted(__all__)
+
+import importlib
+import types
+
+def __getattr__(name):
+    try:
+        module = importlib.import_module(f"{__name__}.{name}")
+    except ModuleNotFoundError:
+        raise AttributeError(f"module '{__name__}' has no attribute '{name}'")
+
+    # If module has a function with the same name, return it
+    if hasattr(module, name) and callable(getattr(module, name)):
+        return getattr(module, name)
+
+    return module
