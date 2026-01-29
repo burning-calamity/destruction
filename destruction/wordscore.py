@@ -575,6 +575,148 @@ LANG_WORDS["he"] = {
     "more","koach","chinuch","regel","politika","tahalich","musika","shuk",
     "mashmaut","leom","tochnit","inyan","mavet","nisayon","hashpaa","shimush"
 }
+# ---------------- SESOTHO (SOUTHERN SOTHO) ----------------
+LANG_WORDS["st"] = {
+    "le","kapa","empa","hobane","hore","ha","mang","eng","hokae","neng","hobaneng",
+    "jwang","nna","wena","ena","rona","lona","bona","ntja","ena","rona","lona",
+    "bona","ya","tsa","ka","ho","ke","ba","na","hae","hao","hae","rona","lona",
+    "bona","ba","ba","e","etsa","re","ya","tla","bona","tseba","kgona","batla",
+    "lokela","nka","fa","beha","tshwara","bua","dumella","jara","tlohela","etsahala",
+    "nahana","sheba","kgutla","utlwa","dula","kena","phela","utloisisa","hopola",
+    "qeta","fihla","ngola","bala","ja","nwa","sebelisoa","ithuta","bapala","matha",
+    "tsamaya","bula","kwala","qala","tswela","fetola","thusa","aha","reka","rekisa",
+    "lefa","fumana","lahleheloa","hlola","nako","selemo","letsatsi","beke","kgwedi",
+    "bophelo","lefatshe","sekolo","naha","lelapa","moithuti","sehlopha","naha",
+    "bothata","letsoho","karolo","sebaka","boemo","ntlha","mmuso","khamphani",
+    "nomoro","tsamaiso","mosebetsi","lenaneo","potso","nnete","ntlo","metsi",
+    "kamore","mme","ntate","sebaka","tjhelete","nalane","lehlakore","mofuta",
+    "hlooho","tshebeletso","motsoalle","matla","hora","papadi","mola","qetello",
+    "setho","molao","koloi","toropo","setjhaba","lebitso","mopresidente","sehlopha",
+    "metsotso","mohoo","ngwana","mmele","tlhahisoleseding","mokokotlo","batsoali",
+    "sefahleho","boemo","ofisi","monyako","bophelo","motho","bonono","ntwa",
+    "mokha","sephetho","phetoho","hoseng","lebaka","patlisiso","ngwanana",
+    "ngwananyana","motsotso","moea","tichere","thuto","leoto","dipolotiki",
+    "tshebetso","mino","mabenkele","moelelo","setjhaba","morero","thahasello",
+    "lefu","phihlelo","phello","tshebediso","kamehla","hangata","le ka mohla",
+    "ka dinako","mona","teng","jwalo","ebe","ntse","se","haholo","hanyane",
+    "lekaneng","ho feta","ho fokola","tsohle","ha ho letho","ntho","mong le mong",
+    "e mong","tshwana","jwalo"
+}
+
+# ---------------- SWAHILI ----------------
+LANG_WORDS["sw"] = {
+    "na","au","lakini","kwa sababu","kwamba","ikiwa","nani","nini","wapi","lini",
+    "kwa nini","vipi","mimi","wewe","yeye","sisi","ninyi","wao","yangu","yako",
+    "yake","yetu","yenu","yao","kuwa","kuwa na","fanya","sema","enda","kuja",
+    "ona","jua","weza","taka","lazima","chukua","toa","weka","shika","zungumza",
+    "amini","beba","acha","tokea","fikiria","tazama","rudi","hisia","baki","ingia",
+    "ishi","elewa","kumbuka","maliza","fika","andika","soma","kula","kunywa",
+    "fanya kazi","jifunza","cheza","kimbia","tembea","fungua","funga","anza",
+    "endelea","badilisha","saidia","jenga","nunua","uza","lipa","pokea","poteza",
+    "shinda","wakati","mwaka","siku","wiki","mwezi","maisha","dunia","shule",
+    "serikali","familia","mwanafunzi","kikundi","nchi","tatizo","mkono","sehemu",
+    "mahali","hali","alama","kampuni","namba","mfumo","kazi","programu","swali",
+    "ukweli","nyumba","maji","chumba","mama","baba","eneo","pesa","historia",
+    "upande","aina","kichwa","huduma","rafiki","nguvu","saa","mchezo","mstari",
+    "mwisho","mwanachama","sheria","gari","jiji","jamii","jina","rais","timu",
+    "dakika","wazo","mtoto","mwili","taarifa","mgongo","wazazi","uso","kiwango",
+    "ofisi","mlango","afya","mtu","sanaa","vita","chama","matokeo","mabadiliko",
+    "asubuhi","sababu","utafiti","msichana","mvulana","wakati","hewa","mwalimu",
+    "elimu","mguu","siasa","mchakato","muziki","soko","maana","taifa","mpango",
+    "nia","kifo","uzoefu","athari","matumizi","daima","mara nyingi","kamwe",
+    "wakati mwingine","hapa","pale","hivyo","kisha","bado","tayari","sana",
+    "kidogo","kutosha","zaidi","chini","kila kitu","hakuna","kitu","kila","mwingine"
+}
+
+# ---------------- ZULU ----------------
+LANG_WORDS["zu"] = {
+    "futhi","noma","kodwa","ngoba","ukuthi","uma","ubani","ini","kuphi","nini",
+    "kungani","kanjani","mina","wena","yena","thina","nina","bona","wami","wakho",
+    "wakhe","wethu","wenu","wabo","ukuba","ukuba na","enza","sho","hamba","za",
+    "bona","azi","akwazi","funa","kumele","thatha","nika","beka","bamba","khuluma",
+    "kholwa","phatha","shiya","kwenzeka","cabanga","buka","buya","zwa","hlala",
+    "ngena","phila","qonda","khumbula","qeda","fika","bhala","funda","dla","phuza",
+    "sebenza","funda","dlala","gijima","hamba","vula","vala","qala","qhubeka",
+    "shintsha","siza","akha","thenga","thengisa","khokha","thola","lahlekelwa",
+    "nqoba","isikhathi","unyaka","usuku","iviki","inyanga","impilo","umhlaba",
+    "isikole","izwe","umndeni","umfundi","iqembu","izwe","inkinga","isandla",
+    "ingxenye","indawo","isimo","iphuzu","uhulumeni","inkampani","inombolo",
+    "uhlelo","umsebenzi","uhlelo","umbuzo","iqiniso","indlu","amanzi","igumbi",
+    "umama","ubaba","indawo","imali","umlando","uhlangothi","uhlobo","ikhanda",
+    "inkonzo","umngane","amandla","ihora","umdlalo","ulayini","isiphetho",
+    "ilungu","umthetho","imoto","idolobha","umphakathi","igama","umongameli",
+    "iqembu","imizuzu","umbono","ingane","umzimba","ulwazi","umhlane","abazali",
+    "ubuso","izinga","ihhovisi","umnyango","impilo","umuntu","ubuciko","impi",
+    "iqembu","umphumela","ushintsho","ekuseni","isizathu","ucwaningo","intombazane",
+    "umfana","isikhathi","umoya","uthisha","imfundo","unyawo","ipolitiki",
+    "inqubo","umculo","imakethe","incazelo","isizwe","uhlelo","intshisekelo",
+    "ukufa","isipiliyoni","umthelela","ukusetshenziswa"
+}
+
+# ---------------- AFRIKAANS ----------------
+LANG_WORDS["af"] = {
+    "en","of","maar","want","dat","as","wie","wat","waar","wanneer","hoekom","hoe",
+    "ek","jy","hy","sy","ons","julle","hulle","my","jou","hom","haar","ons","julle",
+    "hulle","myne","joune","syne","hare","ons s'n","julle s'n","wees","hê","doen",
+    "sê","gaan","kom","sien","weet","kan","wil","moet","neem","gee","sit","hou",
+    "praat","glo","dra","los","gebeur","dink","kyk","terug","voel","bly","ingaan",
+    "leef","verstaan","onthou","klaar","aankom","skryf","lees","eet","drink",
+    "werk","leer","speel","hardloop","loop","oopmaak","toemaak","begin","aanhou",
+    "verander","help","bou","koop","verkoop","betaal","kry","verloor","wen",
+    "tyd","jaar","dag","week","maand","lewe","wêreld","skool","staat","familie",
+    "student","groep","land","probleem","hand","deel","plek","geval","punt",
+    "regering","maatskappy","nommer","stelsel","werk","program","vraag","feit",
+    "huis","water","kamer","ma","pa","gebied","geld","geskiedenis","kant","tipe",
+    "kop","diens","vriend","krag","uur","speletjie","lyn","einde","lid","wet",
+    "motor","stad","gemeenskap","naam","president","span","minuut","idee","kind",
+    "liggaam","inligting","rug","ouers","gesig","vlak","kantoor","deur","gesondheid",
+    "persoon","kuns","oorlog","party","resultaat","verandering","oggend","rede",
+    "navorsing","meisie","seun","oomblik","lug","onderwyser","onderwys","voet",
+    "politiek","proses","musiek","mark","betekenis","nasie","plan","belangstelling",
+    "dood","ervaring","effek","gebruik"
+}
+
+# ---------------- HAUSA ----------------
+LANG_WORDS["ha"] = {
+    "da","ko","amma","saboda","cewa","idan","wa","me","ina","yaya","ni","kai","shi",
+    "ita","mu","ku","su","ni","ka","naka","naki","nashi","nata","nammu","naku",
+    "nasu","kasance","da","yi","ce","tafi","zo","gani","sani","iya","so","dole",
+    "dauka","ba","sanya","rike","yi magana","yarda","dauka","bar","faru","tuna",
+    "kalli","koma","ji","zauna","shiga","rayu","fahimta","tuna","kare","isa",
+    "rubuta","karanta","ci","sha","aiki","koyo","wasa","gudu","tafiya","bude",
+    "rufe","fara","ci gaba","canza","taimaka","gina","saya","sayar","biya",
+    "karba","rasa","ci nasara","lokaci","shekara","rana","mako","wata","rayuwa",
+    "duniya","makaranta","kasa","iyali","dalibi","kungiya","kasa","matsala",
+    "hannu","bangare","wuri","hali","alama","gwamnati","kamfani","lamba","tsari",
+    "aiki","shiri","tambaya","gaskiya","gida","ruwa","daki","uwa","uba","yanki",
+    "kudi","tarihi","gefe","nau'i","kai","sabis","aboki","karfi","awa","wasa",
+    "layi","karshe","memba","doka","mota","birni","al'umma","suna","shugaba",
+    "tawaga","minti","ra'ayi","yaro","jiki","bayani","baya","iyaye","fuska",
+    "mataki","ofis","kofa","lafiya","mutum","fasaha","yaki","jam'iyya","sakamako",
+    "canji","safe","dalili","bincike","yarinya","yaro","lokaci","iska","malami",
+    "ilimi","kafa","siyasa","tsari","waka","kasuwa","ma'ana","kasa","shiri",
+    "sha'awa","mutuwa","kwarewa","tasiri","amfani"
+}
+
+# ---------------- YORUBA (SIMPLIFIED) ----------------
+LANG_WORDS["yo"] = {
+    "ati","tabi","sugbon","nitori","pe","ti","ta","ibo","nigbawo","idi","bawo",
+    "emi","iwo","oun","awa","eyin","awon","mi","re","un","wa","yin","won","tiemi",
+    "tirẹ","tire","tiwa","tiyin","tiwon","je","ni","se","so","lo","wa","ri","mo",
+    "le","fe","gbodo","gba","fun","fi","mu","soro","gba","ru","fi sile","sele",
+    "ro","wo","pada","lero","duro","wole","ye","ye","ranti","pari","de","ko",
+    "ka","je","mu","se ise","ko","dun","sare","rin","si","ti","bere","tesiwaju",
+    "yi","ran","ko","ra","ta","san","gba","sonu","segun","akoko","odun","ojo",
+    "ose","osu","aye","aye","ile-iwe","orile-ede","ebi","akẹkọ","egbe","orile-ede",
+    "isoro","owo","apa","ibi","ipo","ami","ijoba","ile-iṣẹ","nomba","eto","ise",
+    "eto","ibeere","otito","ile","omi","yara","iya","baba","agbegbe","owo",
+    "itan","apa","iru","ori","ise","ore","agbara","wakati","ere","ila","opin",
+    "omo egbe","ofin","oko","ilu","agbegbe","oruko","are","egbe","iseju","ero",
+    "omo","ara","alaye","eyin","obi","oju","ipele","ofiisi","enu","ilera","eniyan",
+    "ona","ogun","egbe oselu","abajade","ayipada","owuro","idi","iwadi","obinrin",
+    "okunrin","akoko","afefe","oluko","eko","ese","oselu","ilana","orin","oja",
+    "itumo","orile","eto","ife","iku","iriri","ipa","lilo"
+}
 
 # ============================================================
 # SCORING ENGINE
