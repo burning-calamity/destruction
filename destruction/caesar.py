@@ -1,20 +1,21 @@
-class CaesarCipher:
-    @staticmethod
-    def encrypt(text: str, key: int) -> str:
-        key = key % 26
-        result = []
+def caesar(text: str, shift: int) -> str:
+    """
+    Apply a Caesar cipher to `text` with the given `shift`.
+    Supports uppercase and lowercase letters. Other characters are unchanged.
+    """
+    result = []
+    shift = shift % 26
 
-        for ch in text:
-            if 'a' <= ch <= 'z':
-                result.append(chr((ord(ch) - ord('a') + key) % 26 + ord('a')))
-            elif 'A' <= ch <= 'Z':
-                result.append(chr((ord(ch) - ord('A') + key) % 26 + ord('A')))
-            else:
-                result.append(ch)
+    for ch in text:
+        if "a" <= ch <= "z":
+            result.append(
+                chr((ord(ch) - ord("a") + shift) % 26 + ord("a"))
+            )
+        elif "A" <= ch <= "Z":
+            result.append(
+                chr((ord(ch) - ord("A") + shift) % 26 + ord("A"))
+            )
+        else:
+            result.append(ch)
 
-        return ''.join(result)
-
-    @staticmethod
-    def decrypt(text: str, key: int) -> str:
-        return CaesarCipher.encrypt(text, -key)
-caesar = CaesarCipher()
+    return "".join(result)
