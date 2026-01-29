@@ -10,8 +10,6 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = { text = "MIT" }
 
-[project.scripts]
-destruction = "destruction.__main__:main"
 
 dependencies = [
 
@@ -340,3 +338,11 @@ dependencies = [
 "wrapt",
 "typing-extensions"
 ]
+
+
+
+[project.scripts]
+destruction = "destruction.__main__:main"
+destruction-test = "destruction.tester:tester"
+destruction-update = "destruction.updater:update"
+destruction-uninstall = "destruction.uninstaller:uninstall_hint"
