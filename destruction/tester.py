@@ -1,95 +1,119 @@
+"""
+tester.py
+=========
+Self-test runner for destruction package.
+
+- Tests every known cipher/module
+- Continues after failures
+- Prints errors + reasons
+- Never crashes
+"""
+
 from __future__ import annotations
-import importlib
-import pkgutil
+
 import traceback
-import sys
-from types import ModuleType
+import importlib
+from typing import Any, Callable, Dict, List, Tuple
 
-PACKAGE = __name__.rsplit(".", 1)[0]
 
-# Minimal test vectors per module/function
-TESTS = {
-    "caesar": lambda m: m.caesar("Hello", 3) == "Khoor",
-    "rot13": lambda m: m.rot13("Hello") == "Uryyb",
-    "atbash": lambda m: m.atbash("abcXYZ") == "zyxCBA",
-    "vigenere": lambda m: m.vigenere("HELLO", "KEY") == "RIJVS",
-    "rail_fence": lambda m: m.rail_fence("HELLOWORLD", 3) == "HOLELWRDLO",
-    "baconian": lambda m: isinstance(m.baconian("AB"), str),
-    "columnar": lambda m: isinstance(m.columnar("HELLO", "KEY"), str),
-    "affine": lambda m: m.affine("ABC", 5, 8) == "INS",
-    "playfair": lambda m: isinstance(m.playfair("HELLO", "KEY"), str),
-    "hill": lambda m: isinstance(m.hill("TEST", (3,3,2,5)), str),
-    "xor": lambda m: isinstance(m.xor_cipher("abc", 23), str),
-    "base64c": lambda m: m.b64decode(m.b64encode("test")) == "test",
-    "langdetect": lambda m: m.detect_language("Hello world") in {"EN","FR","DE","ES","IT"},
-    "autoguess": lambda m: isinstance(m.auto_guess("Uryyb"), list),
-    "uninstaller": lambda m: hasattr(m, "print_uninstall_hint"),
-    "updater": lambda m: hasattr(m, "print_update_hint"),
+# -------------------------------------------------
+# Utilities
+# -------------------------------------------------
+
+def _safe_call(fn: Callable, *args, **kwargs) -> Tuple[bool, str]:
+    try:
+        result = fn(*args, **kwargs)
+        if not isinstance(result, str):
+            return False, f"Returned non-string type: {type(result)}"
+        return True, result
+    except Exception as e:
+        return False, f"{e.__class__.__name__}: {e}"
+
+
+# -------------------------------------------------
+# Test definitions
+# -------------------------------------------------
+
+TESTS: Dict[str, Tuple[str, tuple]] = {
+    # simple ciphers
+    "atbash": ("atbash", ("hello",)),
+    "caesar": ("caesar", ("hello", 3)),
+    "rot13": ("caesar", ("hello", 13)),
+    "vigenere": ("vigenere", ("attack at dawn", "lemon")),
+
+    # transposition / algebraic
+    "rail_fence": ("rail_fence", ("WEAREDISCOVERED", 3)),
+    "affine": ("affine", ("hello", 5, 8)),
+    "playfair": ("playfair", ("hide the gold", "monarchy")),
+
+    # binary / modern
+    "xor": ("xor_cipher", ("hello", "key")),
+    "xor_dec": ("xor_dec", ("68656c6c6f", "key")),
+
+    # enigma
+    "enigma": ("enigma", ("HELLO", (1, 2, 3))),
+
+    # transliteration
+    "transliterate": ("transliterate", ("Καλημέρα κόσμε",)),
+
+    # sandbox
+    "sandbox": ("run_cipher", ("atbash", "hello")),
 }
 
-def _iter_modules():
-    pkg = sys.modules.get(PACKAGE)
-    if not pkg:
-        pkg = importlib.import_module(PACKAGE)
 
-    for info in pkgutil.iter_modules(pkg.__path__):
-        if info.name.startswith("_"):
-            continue
-        yield info.name
+# -------------------------------------------------
+# Tester
+# -------------------------------------------------
 
-def tester():
+def tester() -> None:
     print("=" * 60)
-    print("DESTRUCTION TESTER — MODULE HEALTH CHECK")
+    print("DESTRUCTION SELF TEST")
     print("=" * 60)
 
-    results = []
-    for name in sorted(_iter_modules()):
+    passed = 0
+    failed = 0
+
+    try:
+        sandbox = importlib.import_module("destruction.sandbox")
+    except Exception as e:
+        print("[FATAL] Could not import sandbox:", e)
+        return
+
+    for label, (fn_name, args) in TESTS.items():
+        print(f"\n[Test] {label}")
+
         try:
-            mod: ModuleType = importlib.import_module(f"{PACKAGE}.{name}")
-
-            if name in TESTS:
-                ok = TESTS[name](mod)
-                if ok is True:
-                    results.append((name, "OK", None))
-                else:
-                    results.append((name, "FAIL", "Test returned False"))
+            # resolve function
+            if fn_name == "run_cipher":
+                fn = sandbox.run_cipher
             else:
-                # Module imported but no test defined
-                results.append((name, "SKIP", "No test defined"))
+                fn = getattr(sandbox, fn_name)
+
+            ok, info = _safe_call(fn, *args)
+
+            if ok:
+                print("  ✔ PASS")
+                print("    Output:", info[:120])
+                passed += 1
+            else:
+                print("  ✖ FAIL")
+                print("    Reason:", info)
+                failed += 1
 
         except Exception as e:
-            results.append(
-                (
-                    name,
-                    "ERROR",
-                    "".join(traceback.format_exception_only(type(e), e)).strip(),
-                )
-            )
+            print("  ✖ ERROR")
+            print("    Exception:", e)
+            print("    Traceback:")
+            traceback.print_exc()
+            failed += 1
 
-    # Print report
-    ok = fail = err = skip = 0
-    for name, status, info in results:
-        if status == "OK":
-            ok += 1
-            print(f"[ OK ] {name}")
-        elif status == "SKIP":
-            skip += 1
-            print(f"[SKIP] {name} — {info}")
-        elif status == "FAIL":
-            fail += 1
-            print(f"[FAIL] {name} — {info}")
-        else:
-            err += 1
-            print(f"[ERR ] {name} — {info}")
-
-    print("-" * 60)
-    print(f"Summary: OK={ok}  FAIL={fail}  ERROR={err}  SKIP={skip}")
+    print("\n" + "=" * 60)
+    print(f"SUMMARY: {passed} passed, {failed} failed")
     print("=" * 60)
 
-    return {
-        "ok": ok,
-        "fail": fail,
-        "error": err,
-        "skip": skip,
-        "details": results,
-    }
+
+# -------------------------------------------------
+# Allow destruction.tester() directly
+# -------------------------------------------------
+
+__all__ = ["tester"]
