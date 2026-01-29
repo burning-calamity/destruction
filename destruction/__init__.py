@@ -6,6 +6,7 @@ import importlib
 import pkgutil
 import sys
 from typing import List
+from destruction.scorer import score_text
 
 # ---- automatic discovery of public submodules ----
 
